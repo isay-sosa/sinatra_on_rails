@@ -5,14 +5,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'sinatra_on_rails/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'sinatra_on_rails'
+  spec.name = 'sinatra-on-rails'
   spec.version = SinatraOnRails::VERSION
   spec.authors = ['Isay']
   spec.email = ['yasnet21@gmail.com']
 
-  spec.summary = 'TODO: Write a short summary, because RubyGems requires one.'
-  spec.description = 'TODO: Write a longer description or delete this line.'
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = 'Sinatra with some Rails features.'
+  spec.description = 'Sinatra with some Rails features.'
+  spec.homepage = 'https://github.com/iszandro/sinatra_on_rails'
   spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -30,6 +30,10 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_dependency 'activesupport'
+  spec.add_dependency 'sinatra'
+  spec.add_dependency 'sinatra-contrib'
 
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'minitest', '~> 5.0'
