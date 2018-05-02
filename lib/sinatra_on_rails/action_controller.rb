@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'rescueable'
 require_relative 'viewable'
+require 'active_support/rescuable'
 
 module SinatraOnRails
   class ActionController
     attr_reader :context
 
     extend Forwardable
-    include Rescueable
+    include ActiveSupport::Rescuable
     include Viewable
 
     def_delegators :context, :params, :status, :redirect
@@ -23,7 +23,7 @@ module SinatraOnRails
     def call(action)
       public_send(action)
     rescue Exception => ex
-      rescue_with_handler(ex)
+      rescue_with_handler(ex) || raise
     end
   end
 end

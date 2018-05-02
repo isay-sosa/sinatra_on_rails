@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/inflector'
-
 module SinatraOnRails
   module Routing
     class RouteHelper
