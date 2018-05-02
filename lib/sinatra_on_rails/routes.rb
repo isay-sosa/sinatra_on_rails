@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'mapper'
+require_relative 'routing/formatter'
+require_relative 'routing/inspector'
 
 module SinatraOnRails
   class Routes
@@ -13,6 +15,11 @@ module SinatraOnRails
 
     def draw(&block)
       mapper.instance_exec(&block)
+    end
+
+    def print
+      inspector = Routing::RoutesInspector.new(routes)
+      inspector.format(Routing::ConsoleFormatter.new)
     end
 
     private
