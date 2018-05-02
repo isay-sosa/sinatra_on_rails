@@ -34,8 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport'
   spec.add_dependency 'sinatra', '~> 2.0.1'
   spec.add_dependency 'sinatra-contrib'
+  spec.add_dependency 'rake'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'minitest'
-  spec.add_development_dependency 'rake'
 end

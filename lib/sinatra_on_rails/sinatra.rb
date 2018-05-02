@@ -19,6 +19,19 @@ module Sinatra
       setup_secrets
     end
 
+    def load_tasks
+      require 'rake/testtask'
+
+      local_tasks_dirname = File.dirname(File.dirname(__FILE__))
+
+      Dir[File.join(local_tasks_dirname,'tasks', '*.rake'),
+          File.join(root, 'lib', 'tasks', '*.rake')].each do |task|
+        next unless File.exist?(task)
+
+        load(task)
+      end
+    end
+
     def method_missing(name, *_args, &_block)
       return name[0..-2] == environment if question_method?(name)
       super
