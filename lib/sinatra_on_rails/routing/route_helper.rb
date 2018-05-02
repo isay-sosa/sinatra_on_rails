@@ -27,7 +27,7 @@ module SinatraOnRails
 
           define_method("#{method_name}_url") do |*args|
             options = args.extract_options!.dup
-            "#{options[:host] || Sinatra.secrets.url_options['host']}#{send("#{method_name}_path", options)}"
+            "#{options[:host] || Sinatra.secrets['url_options']['host']}#{send("#{method_name}_path", options)}"
           end
         end
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/ordered_options'
-require 'active_support/string_inquirer'
 require 'erb'
 require_relative 'routes'
 require 'yaml'
@@ -15,13 +13,26 @@ module Sinatra
 
     def configure(application)
       @application = application
-      @environment = ActiveSupport::StringInquirer.new(application.environment.to_s)
+      @environment = application.environment.to_s
       @root = application.root
       @routes = SinatraOnRails::Routes.new(application)
       setup_secrets
     end
 
+    def method_missing(name, *_args, &_block)
+      return name[0..-2] == environment if question_method?(name)
+      super
+    end
+
+    def respond_to_missing?(name)
+      question_method?(name)
+    end
+
     private
+
+    def question_method?(name)
+      name[-1] == '?'
+    end
 
     def setup_secrets
       secrets_path = File.join(root, 'config', 'secrets.yml')
@@ -31,7 +42,7 @@ module Sinatra
       secrets_env = secrets[environment]
 
       return if secrets_env.nil? || secrets_env.empty?
-      @secrets = secrets_env.each_with_object(ActiveSupport::OrderedOptions.new) do |(key, value), hash|
+      @secrets = secrets_env.each_with_object({}) do |(key, value), hash|
         hash[key] = value
         hash
       end

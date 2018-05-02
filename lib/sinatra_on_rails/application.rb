@@ -12,9 +12,6 @@ module SinatraOnRails
     set :environments, Dir["#{root}/config/environments/**/*.rb"]
     set :views, File.join(root, 'app', 'views')
     set :views_engine, :erb
-    set :logging, true
-
-    helpers ActiveSupport::Inflector
 
     class << self
       def inherited(base)
