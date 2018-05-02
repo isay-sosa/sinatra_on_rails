@@ -1,0 +1,18 @@
+AllCops:
+  TargetRubyVersion: 2.5.0
+
+Metrics/LineLength:
+  Max: 110
+  Exclude:
+    - adapters/**/*.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*.rb
+
+Style/Documentation:
+  Enabled: false
