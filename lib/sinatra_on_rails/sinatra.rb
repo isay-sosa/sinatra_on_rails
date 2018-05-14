@@ -11,6 +11,9 @@ module Sinatra
     attr_accessor :logger
     attr_reader :application, :environment, :root, :routes, :secrets
 
+    alias app application
+    alias env environment
+
     def configure(application)
       @application = application
       @environment = application.environment.to_s
