@@ -17,9 +17,12 @@ module SinatraOnRails
         super
 
         Sinatra.configure(base)
-        development_configure
-        production_and_test_configure
+        require_environment_file
         include_helpers
+      end
+
+      def config(&block)
+        Sinatra.application.instance_exec(&block)
       end
 
       private
@@ -32,37 +35,13 @@ module SinatraOnRails
         end
       end
 
-      def development_configure
-        configure(:development) do
-          require_initializers
-          require_and_watch_files
-        end
-      end
-
       def include_helpers
         helpers(*collect_helpers)
       end
 
-      def production_and_test_configure
-        configure(:production, :test) do
-          require_initializers
-          require_files
-        end
-      end
-
-      def require_initializers
-        initializers.sort.each { |file| require file }
-      end
-
-      def require_files
-        files.sort.each { |file| require file }
-      end
-
-      def require_and_watch_files
-        files.sort.each do |file|
-          require file
-          also_reload file
-        end
+      def require_environment_file
+        environment_path = "#{root}/config/environments/#{Sinatra.env}.rb"
+        require environment_path if File.exist?(environment_path)
       end
     end
   end
