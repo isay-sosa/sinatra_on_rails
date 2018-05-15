@@ -2,7 +2,7 @@
 
 module SinatraOnRails
   module Routing
-    class RoutesInspector
+    class Inspector
       def initialize(routes)
         @routes = routes
       end

@@ -19,8 +19,8 @@ module SinatraOnRails
     end
 
     def print
-      inspector = Routing::RoutesInspector.new(routes)
-      inspector.format(Routing::ConsoleFormatter.new)
+      inspector = Routing::Inspector.new(routes)
+      inspector.format(Routing::Formatter.new)
     end
 
     private

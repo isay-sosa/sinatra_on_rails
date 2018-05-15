@@ -2,7 +2,7 @@
 
 module SinatraOnRails
   module Routing
-    class ConsoleFormatter
+    class Formatter
       def initialize
         @buffer = []
       end
