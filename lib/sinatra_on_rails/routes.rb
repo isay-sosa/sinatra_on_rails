@@ -8,13 +8,14 @@ module SinatraOnRails
   class Routes
     attr_reader :routes
 
-    def initialize(app_class)
-      @app_class = app_class
+    def initialize(application)
+      @application = application
       @routes = []
     end
 
     def draw(&block)
       mapper.instance_exec(&block)
+      application.helpers(Routing::RouteHelper.routes)
     end
 
     def print
@@ -24,10 +25,10 @@ module SinatraOnRails
 
     private
 
-    attr_reader :app_class
+    attr_reader :application
 
     def mapper
-      @_mapper ||= Mapper.new(app_class)
+      @_mapper ||= Mapper.new(application)
     end
   end
 end

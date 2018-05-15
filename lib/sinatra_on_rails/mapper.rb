@@ -20,10 +20,10 @@ module SinatraOnRails
     REQUEST_BODY_HTTP_VERBS = %i[post put delete].freeze
 
     attr_accessor :resource_levels, :module_levels
-    attr_reader :app
+    attr_reader :application
 
-    def initialize(app)
-      @app = app
+    def initialize(application)
+      @application = application
       @module_levels = []
       @resource_levels = []
     end

@@ -16,7 +16,7 @@ module SinatraOnRails
       end
 
       def draw_route
-        Route.new(mapper.app).draw(method, ["#{parent_path}#{path}", options])
+        Route.new(mapper.application).draw(method, ["#{parent_path}#{path}", options])
       end
 
       private

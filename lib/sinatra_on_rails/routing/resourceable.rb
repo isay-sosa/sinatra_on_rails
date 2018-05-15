@@ -19,7 +19,7 @@ module SinatraOnRails
         mapper.resource_levels << self
 
         resources_actions.each do |action|
-          Route.new(mapper.app).draw(
+          Route.new(mapper.application).draw(
             self.class::ACTIONS_WITH_HTTP_VERBS[action],
             args_from_resource(action)
           )
