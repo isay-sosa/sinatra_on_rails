@@ -10,14 +10,14 @@ module SinatraOnRails
     extend Forwardable
     include ActiveSupport::Rescuable
     include Viewable
+    include Routing::RouteHelper.routes
 
     def_delegators :context, :params, :status, :redirect
 
+    alias redirect_to redirect
+
     def initialize(context)
       @context = context
-
-      # TODO: Delegate from UrlHelper module instead
-      self.class.def_instance_delegators(:context, *context.methods.grep(/_path|_url/))
     end
 
     def call(action)

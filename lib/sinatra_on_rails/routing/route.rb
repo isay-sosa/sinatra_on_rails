@@ -24,7 +24,7 @@ module SinatraOnRails
 
       def register(path, options = {})
         define_route(path, options)
-        route_helper.define_helper(path, options)
+        RouteHelper.define_helper(path, options)
       end
 
       def define_route(path, options)
@@ -38,10 +38,6 @@ module SinatraOnRails
 
           ActionDispatcher.dispatch(self, options[:to])
         end
-      end
-
-      def route_helper
-        @_route_helper ||= RouteHelper.new(app)
       end
     end
   end
